@@ -35,26 +35,16 @@ public class HomePageTest extends BaseTest {
         Assert.assertTrue(homePage.getThemeAttribute().contains("active"));
     }
 
-    @Test(groups = "testnet", priority = 2)
-    public void showTradingRulesTest() {
-        TradingRules expectedTradingRules = tradingRulesService.getTradingRules();
-        Set<String> expectedRulesSet = Set.copyOf(expectedTradingRules.getRuleList());
-        TradingRules tradingRules = new HomePage()
-            .openPage()
-            .clickTradingGridSettingsButton()
-            .clickTradingRulesButton()
-            .getTradingRules();
+   @Test(groups = "testnet", priority = 2)
+public void showTradingRulesTest() {
+TradingRules expectedTradingRules = tradingRulesService.getTradingRules();
+TradingRules tradingRules = new HomePage()
+.openPage()
+.clickTradingGridSettingsButton()
+.clickTradingRulesButton()
+.getTradingRules();
 
-        Set<String> actualRulesSet = Set.copyOf(tradingRules.getRuleList());
-
-        Collections.sort(tradingRules.getRuleList());
-        System.out.println(tradingRules.getRuleList());
-
-        Collections.sort(expectedTradingRules.getRuleList());
-        System.out.println(expectedTradingRules.getRuleList());
-
-        assertThat(tradingRules.getRuleList().toString(), is(equalTo(expectedTradingRules.getRuleList().toString())));
-    }
-
+assertThat(tradingRules, is(equalTo(expectedTradingRules)));
+}
 
 }
